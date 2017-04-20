@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,7 +96,7 @@ public class Brick : MonoBehaviour {
     void HighGravityBlock()
     {
         FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale += gravity_tweak;
-        //FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = powerup_color;
+        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = powerup_color;
     }
     void LowGravityBlock()
     {
@@ -108,13 +108,11 @@ public class Brick : MonoBehaviour {
         print(i);
         if (enabledTrigger)
         {
-            print("hello");
             while (i >= 0)
             {
                 trigger_bricks[i].GetComponent<SpriteRenderer>().enabled = false;
                 trigger_bricks[i].GetComponent<BoxCollider2D>().enabled = false;
                 i--;
-                print("hello");
             }
             enabledTrigger = false;
         }
