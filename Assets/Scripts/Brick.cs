@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,6 +56,9 @@ public class Brick : MonoBehaviour {
 
         if (timesHit >= max_hits)
         {
+            print(TextManager.points);
+            TextManager.points += 10;
+            print(TextManager.points);
             GameObject smokePuff = Instantiate(smoke, transform.position, Quaternion.identity) as GameObject;
             ParticleSystem.MainModule main = smokePuff.GetComponent<ParticleSystem>().main;
             main.startColor = this.GetComponent<SpriteRenderer>().color;

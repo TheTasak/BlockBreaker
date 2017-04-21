@@ -5,10 +5,12 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
     private Paddle paddle;
     private Vector3 paddleToBallVec;
-    private bool started = false;
+    public bool started = false;
+    public Vector3 ballStartPos;
 
 	// Use this for initialization
 	void Start () {
+        ballStartPos = this.transform.position;
         paddle = GameObject.FindObjectOfType<Paddle>();
         paddleToBallVec = this.transform.position - paddle.transform.position;
         print(paddleToBallVec);
