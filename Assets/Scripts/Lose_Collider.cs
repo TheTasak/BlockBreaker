@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lose_Collider : MonoBehaviour {
-    public Ball ball;
+    private Ball ball;
     private LevelManager levelManager;
     private TextManager textManager;
 
@@ -11,6 +11,7 @@ public class Lose_Collider : MonoBehaviour {
     {
         levelManager = FindObjectOfType<LevelManager>();
         textManager = FindObjectOfType<TextManager>();
+        ball = FindObjectOfType<Ball>();
     }
 
     void OnTriggerEnter2D(Collider2D trigger)
@@ -20,7 +21,9 @@ public class Lose_Collider : MonoBehaviour {
             TextManager.lives--;
             textManager.UpdateText();
             ball.started = false;
-            ball.transform.position = ball.ballStartPos;
+            print(ball.transform.position);
+            ball.transform.position = new Vector3(27.0f, 80.0f, ball.transform.position.y);
+            print(ball.transform.position);
         }
         else
             levelManager.LoadLevel("Lose");

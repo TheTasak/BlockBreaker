@@ -5,32 +5,27 @@ using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour {
 
-    public static int lives = 0; // usunac statyczne
-    public static int points = 0;// usunac statyczne
-    public Text liveText;
-    public Text pointText;
+    public static int lives = 1; // usunac statyczne
+    //public string live;
+    private Text liveText;
 
     void Start ()
     {
-        lives = 0;
-        points = 0;
+        liveText = FindObjectOfType<Text>();
         UpdateText();
-        liveText.text = lives.ToString();
-        pointText.text = points.ToString();
     }
 
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.T))
+            liveText.text = "hello";
         UpdateText();
 	}
 
     public void UpdateText()
     {
-        print("dskafjlaskfhello world");
-        liveText.text = lives.ToString();
-        pointText.text = points.ToString();
-        print(lives);
-        print(points);
+        //live = lives.ToString();
+        liveText.text = "LIFES: " + lives.ToString();
     }
 }
