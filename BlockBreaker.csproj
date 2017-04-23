@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Lose_Collider.cs" />
     <Compile Include="Assets\Scripts\MusicPlayer.cs" />
     <Compile Include="Assets\Scripts\Paddle.cs" />
+    <Compile Include="Assets\Scripts\TextManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
