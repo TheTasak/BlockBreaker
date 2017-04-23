@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour {
 
     public void LoadLevel(string name)
     {
+        if (name == "Level_01")
+            TextManager.lives = 1;
         Brick.br_bricks = 0;
         Application.LoadLevel(name);
     }

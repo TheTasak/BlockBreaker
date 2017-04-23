@@ -9,8 +9,9 @@ public class Brick : MonoBehaviour {
     public GameObject smoke;
     public float gravity_tweak;
     public float start_gravity;
-    public Color powerup_color;
     public Brick[] trigger_bricks;
+    private Vector3 or_tel;
+    public Vector3 fixed_tel;
 
     public static int br_bricks;
     private Vector2 powerup_tweak;
@@ -20,6 +21,7 @@ public class Brick : MonoBehaviour {
     private bool enabledTrigger = true;
     // Use this for initialization
     void Start () {
+        or_tel = this.transform.position;
         start_gravity = FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale;
         powerup_tweak = new Vector2(Random.Range(100f, 50f), Random.Range(100f, 50f));
         timesHit = 0;
@@ -48,6 +50,8 @@ public class Brick : MonoBehaviour {
     {
         max_hits = hit_sprites.Length + 1;
         timesHit++;
+        if (this.name == "Teleporting")
+            TeleportingBlock();
 
         if (FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale > start_gravity)
             FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale -= 0.5f;
@@ -88,24 +92,26 @@ public class Brick : MonoBehaviour {
     void SlowBlock()
     {
         FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().velocity += -powerup_tweak;
+        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = new Color(100, 0, 200);
     }
     void FastBlock()
     {
         FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().velocity += powerup_tweak;
+        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = new Color(0, 100, 255);
     }
     void HighGravityBlock()
     {
         FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale += gravity_tweak;
-        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = powerup_color;
+        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = new Color(255,0,0);
     }
     void LowGravityBlock()
     {
         FindObjectOfType<Ball>().GetComponent<Rigidbody2D>().gravityScale -= gravity_tweak;
+        FindObjectOfType<Ball>().GetComponent<SpriteRenderer>().color = new Color(200, 50, 10);
     }
     void Trigger()
     {
         int i = trigger_bricks.Length - 1;
-        print(i);
         if (enabledTrigger)
         {
             while (i >= 0)
@@ -124,6 +130,19 @@ public class Brick : MonoBehaviour {
                 trigger_bricks[i].GetComponent<BoxCollider2D>().enabled = true;
                 i--;
             }
+            enabledTrigger = true;
+        }
+    }
+    void TeleportingBlock()
+    {
+        if (enabledTrigger)
+        {
+            this.transform.position = fixed_tel;
+            enabledTrigger = false;
+        }
+        else
+        {
+            this.transform.position = or_tel;
             enabledTrigger = true;
         }
     }
